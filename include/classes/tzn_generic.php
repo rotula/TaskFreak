@@ -228,7 +228,7 @@ class Tzn {
 		} else {
 			if (round($value) != $value) {
 				$dec = 2;
-				if (is_object($this)) {
+				if (isset($this) && is_object($this)) {
 					$arrType = explode(',',$this->_properties[$key]);
 					if (count($arrType) > 1) {
 						$dec = $arrType[1];
@@ -262,7 +262,7 @@ class Tzn {
 		} else {
 			if (round($value) != $value) {
 				$dec = 2;
-				if (is_object($this)) {
+				if (isset($this) && is_object($this)) {
 					$arrType = explode(',',$this->_properties[$key]);
 					if (count($arrType) > 1) {
 						$dec = $arrType[1];
@@ -312,7 +312,7 @@ class Tzn {
 	
 	function getBol($keyval,$default=null)
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			// $value = Tzn::_value($keyval,$default);
 			if (is_null($this->$keyval)) {
 				$value = $default;
@@ -384,7 +384,7 @@ class Tzn {
 	}
 
     function getLvl($keyval, $level) {
-        if (is_object($this)) {
+        if (isset($this) && is_object($this)) {
             $data =& $this->$keyval;
         } else {
         	$data =& $keyval;
@@ -401,7 +401,7 @@ class Tzn {
 	
 	function _value($keyval,$default='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			if (preg_match("/^(.*)\((.*)\)$/i",$keyval,$m)) {
 				$keyval = $m[1];
 				if ($m[2]) {
@@ -474,7 +474,7 @@ class Tzn {
 			$tz = TZN_TZSERVER;
 		} else if ($tz == 'user') {
 			$tz = intval($_SESSION['tznUserTimeZone']);
-		} else if (is_object($this) && isset($this->$tz)) {
+		} else if (isset($this) && is_object($this) && isset($this->$tz)) {
 			$tz = intval($this->$tz);
 		} else {
 			$tz = 0;
@@ -881,7 +881,7 @@ class Tzn {
 	}
 
     function setLvl($keyval, $param1, $param2=null) {
-		 if (is_object($this)) {
+		 if (isset($this) && is_object($this)) {
             $data =& $this->$keyval;
         } else {
         	$data =& $keyval;
@@ -1024,7 +1024,7 @@ class Tzn {
 
 	function pImg($keyval,$default='&nbsp;',$width=9999,$height=9999,$extra='') {
 		// pImg (key, [default, [width,height]])
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = $this->_value($keyval);
 		} else {
 			$value = $keyval;
@@ -1069,7 +1069,7 @@ class Tzn {
 	function pTmz($keyval,$default='') 
 	{
 		$value = $keyval;
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = $this->_value($keyval);
 		}
 		print Tzn::_tmz($value);
@@ -1077,7 +1077,7 @@ class Tzn {
 
     function pLvl($name,$level,$default=null,$yes=TZN_BOOL_TRUE,$no=TZN_BOOL_FALSE)
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
             $data =& $this->$name;
         } else {
         	$data = '';
@@ -1118,7 +1118,7 @@ class Tzn {
 		
 	function qHidden($keyval,$default='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::_value($keyval,$default);
 		} else {
 			$value = $default;
@@ -1133,7 +1133,7 @@ class Tzn {
 			$len = $style;
 			$style = '';
 		}
-		if (is_object($this) && ($this->_properties[$keyval])) {
+		if (isset($this) && is_object($this) && ($this->_properties[$keyval])) {
 			$value = Tzn::_value($keyval,$default);
 			if (!$style) {
 				$arrType = explode(',',$this->_properties[$key]);
@@ -1187,7 +1187,7 @@ class Tzn {
 	
 	function qPassword($keyval,$default='',$style='',$xtra='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::_value($keyval,$default);
 		} else {
 			$value = $default;
@@ -1208,7 +1208,7 @@ class Tzn {
 	
 	function qTextArea($keyval,$default='',$style='tznFormTxt',$xtra='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = htmlspecialchars(Tzn::_value($keyval,$default));
 			//$value = $this->get($keyval,$default);
 		} else {
@@ -1232,7 +1232,7 @@ class Tzn {
 
 	function qBbs($keyval,$default='',$style='tznFormBbs',$xtra='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::_value($keyval,$default);
 		} else {
 			$value = $default;
@@ -1255,7 +1255,7 @@ class Tzn {
 	
 	function qHtml($keyval,$default='',$style='tznFormHtml',$xtra='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::getHtm($keyval,$default);
 		} else {
 			$value = $default;
@@ -1277,7 +1277,7 @@ class Tzn {
 	}
 	
 	function qImage($keyval,$default='',$style='',$xtra='') {
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::_value($keyval,$default);
 		} else {
 			$value = $default;
@@ -1350,7 +1350,7 @@ class Tzn {
 		if ($nochoice) {
 			$form .='<option value="">'.$nochoice.'</option>';
 		}
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			if ($this->rMore()) {
 				while ($item = $this->rNext()) { 
 					$form .= '<option value="'.$item->id.'"';
@@ -1378,7 +1378,7 @@ class Tzn {
 		if ($nochoice) {
 			$form .='<option value="">'.$nochoice.'</option>';
 		}
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			if ($this->rMore()) {
 				while ($item = $this->rNext()) { 
 					$v2 = $item->_value($key);
@@ -1396,7 +1396,7 @@ class Tzn {
 	}
 	
 	function qTimeZone($keyval,$default=0,$style='',$xtra='') {
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::_value($keyval,$default);
 		} else {
 			$value = $default;
@@ -1418,7 +1418,7 @@ class Tzn {
 	
 	function qDate($keyval,$default='',$style='tznFormDate',$xtra='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::getDte($keyval,'FRM',$default);
 		} else {
 			$value = $default;
@@ -1430,7 +1430,7 @@ class Tzn {
 	function qDateTime($keyval,$tz=TZN_TZDEFAULT,$default=''
 		,$style='tznFormDate',$xtra='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::getDte($keyval,'FRM',$tz,$default);
 		} else {
 			$value = $default;
@@ -1453,7 +1453,7 @@ class Tzn {
 	
 	function qSubmit($keyval,$default='',$style='',$xtra='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::get($keyval,$default);
 		} else {
 			$value = $default;
@@ -1474,7 +1474,7 @@ class Tzn {
 
 	function qButton($keyval,$default='',$style='',$xtra='')
 	{
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
 			$value = Tzn::get($keyval,$default);
 		} else {
 			$value = $default;
@@ -1494,7 +1494,7 @@ class Tzn {
 	}
 
     function qLevel($name, $level, $default='') {
-		if (is_object($this)) {
+		if (isset($this) && is_object($this)) {
             $data =& $this->$name;
         } else {
         	$data = '';
@@ -1597,7 +1597,7 @@ class Tzn {
      */
     function pError($key)
     {
-    	if (is_object($this)) {
+    	if (isset($this) && is_object($this)) {
 	        $this->printError($key);
 	    }
     }
