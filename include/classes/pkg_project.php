@@ -87,7 +87,8 @@ class Item extends TznDb
     function setStatus($status,$userId) {
         $objItemStatus = new ItemStatus();
         $objItemStatus->itemId = $this->id;
-        $objItemStatus->memberid = $userId;
+        // $objItemStatus->memberid = $userId;
+        $objItemStatus->member = $userId;
         $objItemStatus->statusKey = $status;
         $objItemStatus->add();
     }

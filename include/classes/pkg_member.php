@@ -92,7 +92,7 @@ class Project extends TznDb
 		$objStatus->projectId = $this->id;
 		$objStatus->setDtm('statusDate','NOW');
 		$objStatus->statusKey = $status;
-        	$objStatus->memberid = $userId;
+		$objStatus->member = $userId;
 		return $objStatus->add();
 	}
 
@@ -108,12 +108,16 @@ class Project extends TznDb
 	function add($status=null,$userId=null,$ignore=null) {
 		if (parent::add(false)) {
             		// add poroject initial status
+                        // Try to add the object and not just the ID.
+                        $user = new Member();
+                        $user->load($userId);
+			// if ($this->setStatus($status,$userId)) {
 			if ($this->setStatus($status,$userId)) {
                 		// add user as project leader
                 		$objLeader = new MemberProject();
                 		$objLeader->initObjectProperties();
                 		$objLeader->projectid = $this->id;
-                		$objLeader->memberid = $userId;
+                		$objLeader->member = $userId;
                 		$objLeader->position = FRK_PROJECT_LEADER; // leader
                 		return $objLeader->add();
             		} else {

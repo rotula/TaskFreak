@@ -153,13 +153,15 @@ if ($_POST['submit']) {
             if ($objEditItem->isLoaded()) {
                 // --- save project status ---
                 if ($pUserCanStatus && !$pMessageError && $_POST['status'] != $objEditItem->projectStatus->statusKey) {
-                    $objEditItem->setStatus($_POST['status'],$objUser->id);
+                    // $objEditItem->setStatus($_POST['status'],$objUser->id);
+                    $objEditItem->setStatus($_POST['status'],$objUser);
                     $pMessageStatus = $GLOBALS['langProject']['action_status_ok'];
                 } else {
                     $pMessageStatus = $GLOBALS['langProject']['action_save_ok'];
                 }
                 $objEditItem->update();
-            } else if ($objEditItem->add($_POST['status'],$objUser->id)) { // add in DB
+            // } else if ($objEditItem->add($_POST['status'],$objUser->id)) { // add in DB
+            } else if ($objEditItem->add($_POST['status'],$objUser)) { // add in DB
                 $pMessageStatus = $GLOBALS['langProject']['action_added_ok'];
             }
         } else {

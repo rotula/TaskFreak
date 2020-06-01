@@ -339,7 +339,8 @@ function task_update_status($id,$status) {
     if ($objTask = ajaxLoadTask($id,8,true,$objUser,$objResponse)) {
         $newStatus = intval($status);
         if ($newStatus != $objTask->itemStatus->statusKey) {
-            $objTask->setStatus($newStatus,$objUser->id);
+            // $objTask->setStatus($newStatus,$objUser->id);
+            $objTask->setStatus($newStatus,$objUser);
 			if ($newStatus == FRK_STATUS_LEVELS) {
 				// task is completed
 				if (@constant('FRK_COMPLETE_DEADLINE') == TRUE) {
@@ -531,7 +532,8 @@ function task_update_full($data) {
 
         // update status
         if ($oldStatus != $newStatus) {
-			$objTask->setStatus($newStatus,$objUser->id);
+			// $objTask->setStatus($newStatus,$objUser->id);
+			$objTask->setStatus($newStatus,$objUser);
 
 			if ($newStatus == FRK_STATUS_LEVELS) {
 				// task is completed
